@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    
+  </head>
+  
+<!----------------------------------------------------------------------------------------->
+
+  <body>
+    <!-------Nav Bar 1--------------->
+    <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
+        <button class="navbar-toggler" id="navbarbtn" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    
+    <!-------Nav Bar 2--------------->
+    <nav id = "navone" style = "float: left;" class="border border-dark">
+    <div class="sidebar-sticky" style="height: 100%;">
+        <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
+            <li class="nav-item myid">
+            <a class="nav-link active text-black" href="home.html" style="margin-left: 0px;" id = "navbaroptions">
+                Home <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item myid">
+            <a class="nav-link text-black" href="visualizations.html">
+                Visualizations
+            </a>
+            </li>
+            <li class="nav-item myid" id = "myid1">
+            <a class="nav-link text-black" href="#">
+                Summary Statistics
+            </a>
+            </li>
+            <li class="nav-item summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Non Alerts
+            </a>
+            </li>              
+            <li class="nav-item   summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Alerts
+            </a>
+            </li>
+            <li class="nav-item   summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Escalations
+            </a>
+            </li>
+            <div id="summarystatisticsexpand">
+            <li class="nav-i    tem  myid">
+            <a class="nav-link text-black" href="data.html">
+                Data
+            </a>
+            </li>
+
+        </ul>
+    <!-------Nav Bar 3--------------->    
+        <div style="height: 100%; padding: 0; background-color: rgb(80, 170, 248);">
+            <hr class="bg-light" >
+            <ul class="nav flex-column ">
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="faq.html">
+                FAQ's
+            </a>
+            </li>
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="#">
+                About
+            </a>
+            </li>
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="#">
+                Log out
+            </a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+    
+    <div class="container-fluid"> </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="faqaccordion.js"></script> 
+    <script src="slider.js"></script>
+  
+    <!-- This is for Icons ------------>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>feather.replace()</script>
+
+    
+    <!-------------Top Part------------------------>
+    <!-------Graph Spaces--------------->
+    <div><h6 style="position: absolute;transform: translate(530px,358px);">Histogram</h6></div>
+    <div><h6 style="position: absolute;transform: translate(930px,358px);">Box Plot</h6></div>
+    <div><h6 style="position: absolute;transform: translate(1280px,358px);">Mosaic Plot</h6></div>
+    <div id="histoSpace" style="border:solid 1px black; width:fit-content;position: absolute;transform: translate(400px,18%);"></div>
+    <div id="boxSpace" style="border:solid 1px black; width:fit-content;position: absolute;transform: translate(775px,18%);"></div>
+    <div id="mosaicSpace" style="border:solid 1px black; width:fit-content;position: absolute;transform: translate(1150px,18%);"></div>
+
+    <!---Radio Buttons------------------------------>
+    <div style="transform: translate(225px, 100px); width:fit-content; position:absolute">
+        <form class="pure-form">
+            <label for="checkbox-radio-option-one" class="pure-radio">
+                <input type="radio" id="checkbox-radio-option-one" name="optionsRadios" value="Non-Alerts" checked=""/> Non-Alerts </label> <br>
+            <label for="checkbox-radio-option-two" class="pure-radio">
+                <input type="radio" id="checkbox-radio-option-two" name="optionsRadios" value="Alerts" /> Alerts </label><br>
+            <label for="checkbox-radio-option-three" class="pure-radio">
+                <input type="radio" id="checkbox-radio-option-three" name="optionsRadios" value="Escalations" /> Escalations </label>
+        </form>
+    </div>
+   
+    <!---Features Drop Down----------------------->
+    <div class="dropdown" style="position:absolute; transform: translate(750px,10px);">
+        <button class="btn btn-secondary dropdown-toggle" style="line-height: 1.15" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Features
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Feature 1</a>
+          <a class="dropdown-item" href="#">Feature 2</a>
+          <a class="dropdown-item" href="#">Feature 3</a>
+          <a class="dropdown-item" href="#">Feature 4</a>
+          <a class="dropdown-item" href="#">Feature 5</a>
+          <a class="dropdown-item" href="#">Feature 6</a>
+        </div>
+    </div>
+
+    <hr style="height:10px;color:black;background-color:rgb(80, 170, 248);transform:translateY(386px); width:100%">
+
+
+    <!-------------Bottom Part------------------------>
+    <div id="featureimp" style="position: absolute; transform:translate(200px,386px); width:375px;">
+    <table class="table">
+        <thead class="thead-dark" style="line-height: 0.75;">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Features</th>
+        </tr>
+        </thead>
+        <tbody style="line-height: 0.5;">
+        <tr>
+            <th scope="row">1</th>
+            <td>Feature 4</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Feature 2</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Feature 1</td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>Feature 3</td>
+        </tr>
+        <tr>
+            <th scope="row">5</th>
+            <td>Feature 5</td>
+        </tr>
+        <tr>
+            <th scope="row">6</th>
+            <td>Feature 6</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <div id="featureHist" style="position: absolute; transform:translate(650px,386px);"></div> 
+    <div><h4 style="position: absolute;transform: translate(850px,375px);">Features Importance</h4></div>
+    <div><h4 style="position: absolute;transform: translate(1350px,375px);">Recall</h4></div>
+    <div><h4 style="position: absolute;transform: translate(1340px,500px);">Precision</h4></div>
+    <img src="gauge.png" alt="Speedometer1" width="150" height="80" style="position:absolute; transform: translate(1150px,410px);">
+    <img src="gauge.png" alt="Speedometer2" width="150" height="80" style="position:absolute; transform: translate(1150px,530px);">
+
+</body>
+
+<!---------Histogram------------------------------------------>
+<script>
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(data) {
+        var margin = {top: 10, right: 30, bottom: 30, left: 40},
+        width = 350 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#histoSpace")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+        
+        // X axis: scale and draw:
+        var x = d3.scaleLinear()
+        .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+        .range([0, width]);
+        svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+        
+        // set the parameters for the histogram
+        var histogram = d3.histogram()
+        .value(function(d) { return d.price; })   // I need to give the vector of value
+        .domain(x.domain())  // then the domain of the graphic
+        .thresholds(x.ticks(70)); // then the numbers of bins
+        
+        // And apply this function to data to get the bins
+        var bins = histogram(data);
+        
+        // Y axis: scale and draw:
+        var y = d3.scaleLinear()
+        .range([height, 0]);
+        y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+        svg.append("g")
+        .call(d3.axisLeft(y));
+        
+        // append the bar rectangles to the svg element
+        svg.selectAll("rect")
+        .data(bins)
+        .enter()
+        .append("rect")
+        .attr("x", 1)
+        .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
+        .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+        .attr("height", function(d) { return height - y(d.length); })
+        .style("fill", "#69b3a2")
+    });
+</script>
+
+<!--Box Plot------------------------------------------>
+<script>
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(loadedRows) {
+        keys = d3.keys(loadedRows[1]);   
+        var margin = {top: 10, right: 30, bottom: 30, left: 80},
+        width = 350 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#boxSpace")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var data = loadedRows.map(d => d[keys[0]]);
+        
+        // Compute summary statistics used for the box:
+        var data_sorted = data.sort(d3.ascending)
+        var q1 = d3.quantile(data_sorted, .25)
+        var median = d3.quantile(data_sorted, .5)
+        var q3 = d3.quantile(data_sorted, .75)
+        var interQuantileRange = q3 - q1
+        var min = q1 - 1.5 * interQuantileRange
+        var max = q1 + 1.5 * interQuantileRange
+        
+        // Show the Y scale
+        var y = d3.scaleLinear()
+        .domain([min,max])
+        .range([height, 0]);
+        var yAxis = d3.axisLeft(y);
+        const yAxisGroup = svg.append('g');
+        yAxisGroup.call(yAxis);
+        yAxisGroup.selectAll('text');
+        svg.append("text")
+        .attr("text-anchor", "end")
+        .attr("y", -50)
+        .attr("x", -50)
+        .attr("transform", "rotate(-90)")
+        .text(keys[1]);
+
+        // a few features for the box
+        var center = 200
+        var width = 100
+
+        // Show the main vertical line
+        svg
+        .append("line")
+        .transition()
+        .duration(1000)
+        .attr("x1", center)
+        .attr("x2", center)
+        .attr("y1", y(min) )
+        .attr("y2", y(max) )
+        .attr("stroke", "black")
+
+        // Show the box
+        svg
+        .append("rect")
+        .style("fill", "white")
+        .transition()
+        .duration(1000)
+        .attr("x", center - width/2)
+        .attr("y", y(q3) )
+        .attr("height", (y(q1)-y(q3)) )
+        .attr("width", width )
+        .attr("stroke", "white")
+        .style("fill", "#69b3a2")
+
+        // show median, min and max horizontal lines
+        svg
+        .selectAll("toto")
+        .data([min, median, max])
+        .enter()
+        .append("line")
+        .attr("x1", center-width/2)
+        .attr("x2", center+width/2)
+        .attr("y1", function(d){ return(y(d))} )
+        .attr("y2", function(d){ return(y(d))} )
+        .attr("stroke", "black")
+    });
+</script>
+
+<!--Mosaic Plot------------------------------------------>
+<script>
+    d3.csv('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/data_hierarchy_1level.csv', function(data) {
+        
+        // set the dimensions and margins of the graph
+        var margin = {top: 10, right: 10, bottom: 10, left: 10},
+        width = 350 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#mosaicSpace")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+        
+        // stratify the data: reformatting for d3.js
+        var root = d3.stratify()
+        .id(function(d) { return d.name; })   // Name of the entity (column name is name in csv)
+        .parentId(function(d) { return d.parent; })   // Name of the parent (column name is parent in csv)
+        (data);
+        root.sum(function(d) { return +d.value })   // Compute the numeric value for each entity
+        
+        // Then d3.treemap computes the position of each element of the hierarchy
+        // The coordinates are added to the root object above
+        d3.treemap()
+        .size([width, height])
+        .padding(4)
+        (root)
+        console.log(root.leaves())
+        
+        // use this information to add rectangles:
+        svg
+        .selectAll("rect")
+        .data(root.leaves())
+        .enter()
+        .append("rect")
+        .attr('x', function (d) { return d.x0; })
+        .attr('y', function (d) { return d.y0; })
+        .attr('width', function (d) { return d.x1 - d.x0; })
+        .attr('height', function (d) { return d.y1 - d.y0; })
+        .style("stroke", "black")
+        .style("fill", "#69b3a2");
+        
+        // and to add the text labels
+        svg
+        .selectAll("text")
+        .data(root.leaves())
+        .enter()
+        .append("text")
+        .attr("x", function(d){ return d.x0+10})    // +10 to adjust position (more right)
+        .attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
+        .text(function(d){ return d.data.name})
+        .attr("font-size", "15px")
+        .attr("fill", "white")
+        })
+</script>
+
+<!--Feature Imp Histogram-------->
+<script>
+
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 20, right: 30, bottom: 40, left: 90},
+        width = 550 - margin.left - margin.right,
+        height = 250 - margin.top - margin.bottom;
+    
+    // append the svg object to the body of the page
+    var svg = d3.select("#featureHist")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+    
+    // Parse the Data
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv", function(data) {
+    
+      // Add X axis
+      var x = d3.scaleLinear()
+        .domain([0, 13000])
+        .range([ 0, width]);
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+    
+      // Y axis
+      var y = d3.scaleBand()
+        .range([ 0, height ])
+        .domain(data.map(function(d) { return d.Country; }))
+        .padding(.1);
+      svg.append("g")
+        .call(d3.axisLeft(y))
+    
+      //Bars
+      svg.selectAll("myRect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", x(0) )
+        .attr("y", function(d) { return y(d.Country); })
+        .attr("width", function(d) { return x(d.Value); })
+        .attr("height", y.bandwidth() )
+        .attr("fill", "#69b3a2")
+    
+    
+        // .attr("x", function(d) { return x(d.Country); })
+        // .attr("y", function(d) { return y(d.Value); })
+        // .attr("width", x.bandwidth())
+        // .attr("height", function(d) { return height - y(d.Value); })
+        // .attr("fill", "#69b3a2")
+    
+    })
+    
+    </script>
