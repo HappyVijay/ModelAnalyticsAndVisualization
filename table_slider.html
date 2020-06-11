@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  
+}
+.table1 {
+	padding-top: 0px;  
+  column-width: 1000px;
+  border-width: 100px;
+}
+
+.table2 {
+  border-spacing: 1px;
+}
+.rangeslider{ 
+    width: 50%; 
+    padding-left: 800px;
+    padding-top: 0px;
+} 
+
+.div1 {
+  width: 120px;
+  height: 20px;
+  border: 1px solid blue;
+ 
+}
+
+.div2 {
+  width: 120px;
+  height: 20px;
+  border: 1px solid blue;
+
+
+
+
+</style>
+</head>
+<body>
+
+<h2 style = "text-align: center;">Alert Summary Statistics</h2>
+
+<div class = "table2" style="width:50%;float:left">
+  <table >
+  <tr>
+    <th>Total Cases per Surveillance</th>
+    <th>Alerts per Surveillance</th> 
+    <th>Alerts vs Overall</th>
+    <th>Alerts per business review</th>
+    
+  </tr>
+  <tr>
+    <td>2456</td>
+    <td>8000</td>
+    <td>5674</td>
+    <td>4000</td>
+  </tr>
+</table>
+</div>
+
+
+<header>
+<div class="rangeslider"> 
+  <p class = "div3" id = "ratio">Ratio: 2.5</p>
+  <p class = "div1" id="value1" >Alert: 50</p>
+  <p class = "div2" id="value2">Escalation: 20</p>
+  <input type="range" min="1" max="100" value="0"
+                  class="myslider" id="sliderRange"> 
+  <p>Cuttoff: <span id="demo"></span></p> 
+  
+</div> 
+</header>
+
+
+<section>
+ <div class = "table1" id = "table1">
+
+            <script type = "text/javascript">
+                tabledata();
+            </script>
+        </div>
+</section>
+
+</body>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script type="text/javascript">
+
+d3.text("https://raw.githubusercontent.com/hxchua/datadoubleconfirm/master/datasets/arrivals2018.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+
+
+  var rangeslider = document.getElementById("sliderRange"); 
+var output = document.getElementById("demo");
+
+var output2 = document.getElementById("value1"); 
+var output3 = document.getElementById("value2"); 
+output.innerHTML = rangeslider.value; 
+  
+rangeslider.oninput = function() { 
+  output.innerHTML = this.value;
+  var value1 = (95 + this.value / 10);
+  document.getElementById('value1').innerHTML = "Alert:  " + value1;
+  var value2 = (value1-50).toFixed(2);
+  document.getElementById('value2').innerHTML = "Escalation:  " + value2;
+  var ratio = (value1/value2).toFixed(4);
+  document.getElementById('ratio').innerHTML = "Ratio:  " + ratio;
+}
+</script>
+</html>
