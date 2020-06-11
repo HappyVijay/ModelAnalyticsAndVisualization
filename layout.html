@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
+      <button class="navbar-toggler" id="navbarbtn" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+    </nav>
+    <nav id = "navone" style = "float: left;" class="border border-dark">
+      <div class="sidebar-sticky" style="height: 100%;">
+
+      <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
+        <li class="nav-item myid">
+          <a class="nav-link active text-black" href="home.html" style="margin-left: 0px;" id = "navbaroptions">
+            Home <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-black" href="visualizations.html">
+            Visualizations
+          </a>
+        </li>
+        <li class="nav-item myid" id = "myid1">
+          <a class="nav-link text-black" href="#">
+            Summary Statistics
+          </a>
+        </li>
+        <li class="nav-item summarystatistics myid">
+          <a class="nav-link text-black" href="#">
+              Non Alerts
+          </a>
+        </li>              
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="#">
+            Alerts
+          </a>
+        </li>
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="#">
+            Escalations
+          </a>
+        </li>
+        <div id="summarystatisticsexpand">
+        <li class="nav-i    tem  myid">
+          <a class="nav-link text-black" href="data.html">
+            Data
+          </a>
+        </li>
+
+      </ul>
+      
+      <div style="height: 100%; padding: 0; background-color: rgb(80, 170, 248);">
+          <hr class="bg-light" >
+          <ul class="nav flex-column ">
+        <li class="nav-item navbaroptions myid">
+          <a class="nav-link text-dark " href="faq.html">
+            FAQ's
+          </a>
+        </li>
+        <li class="nav-item navbaroptions myid">
+          <a class="nav-link text-dark " href="#">
+              About
+          </a>
+        </li>
+        <li class="nav-item navbaroptions myid">
+          <a class="nav-link text-dark " href="#">
+              Log out
+          </a>
+        </li>
+
+      </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container-fluid">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="faqaccordion.js"></script> 
+    <script src="slider.js"></script>
+  
+    <!-- This is for Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>feather.replace()</script>
+
+  </body>
+</html>
