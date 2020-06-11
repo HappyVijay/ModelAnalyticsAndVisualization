@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+      <script type="text/javascript">
+        function Upload() {
+            var fileUpload = document.getElementById("fileUpload");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+            if (regex.test(fileUpload.value.toLowerCase())) {
+                if (typeof (FileReader) != "undefined") {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var dyDropDown1 = document.getElementById("dynamicDropDown1");
+                        var dyDropDown2 = document.getElementById("dynamicDropDown2");
+                        var dyDropDown3 = document.getElementById("dynamicDropDown3");
+                           // console.log(dyDropDown);
+                        var table = document.createElement("table");
+                        var rows = e.target.result.split("\n");
+                        var headers = rows[0].split(',');
+
+                        
+
+                        for (var i = 0; i < headers.length; i++) {
+                           
+                            var cells = rows[0].split(",");
+                            if (cells.length == headers.length) {
+                              //dyDropDown.innerHTML += `<option> {rows[i]} </option>`
+                              var option1 = document.createElement('option');
+                              option1.text = option1.value = cells[i];
+                              dyDropDown1.add(option1);
+                              var row = table.insertRow(-1);
+                                for (var j = 0; j < cells.length; j++) {
+
+                                    var cell = row.insertCell(-1);
+                                    cell.innerHTML = cells[j];
+                                }
+
+                                var option2 = document.createElement('option');
+                                option2.text = option2.value = cells[i];
+                                dyDropDown2.add(option2);
+                                var row = table.insertRow(-1);
+                                for (var j = 0; j < cells.length; j++) {
+
+                                    var cell = row.insertCell(-1);
+                                    cell.innerHTML = cells[j];
+                                }
+
+                                var option3 = document.createElement('option');
+                                option3.text = option3.value = cells[i];
+                                dyDropDown3.add(option3);
+                                var row = table.insertRow(-1);
+                                for (var j = 0; j < cells.length; j++) {
+
+                                    var cell = row.insertCell(-1);
+                                    cell.innerHTML = cells[j];
+                                }
+
+                            }
+                        }
+                        
+
+                        //var dvCSV = document.getElementById("dvCSV");
+                        //dvCSV.innerHTML = "";
+                        //dvCSV.appendChild(table);
+                    }
+                    reader.readAsText(fileUpload.files[0]);
+                } else {
+                    alert("This browser does not support HTML5.");
+                }
+            } else {
+                alert("Please upload a valid CSV file.");
+            }
+        }
+    </script>
+    <div class = "container">
+      
+
+      <input type="file" id="fileUpload" />
+      <button class = "btn btn-success" data-target = "#mymodel" data-toggle = "modal" onclick="Upload()">Upload</button>
+
+      <hr />
+      <div id="dvCSV">
+      </div>
+      
+
+      <div class = "modal" id = "mymodel">    <!--everything in this div is of bootstrap modal-->
+          <div class = "modal-dialog">
+            <div class = "modal-content"> <!--contains all design related-->
+              <div class = "modal-header">
+                <h3 class = "text-primary"> select the features </h3>
+                <button type = "button" class = "close" data-dismiss="modal"> &times;</button>
+              </div>
+              <div class = "modal-body">
+                <form>
+                  <div class = "form-group">
+                    
+                   
+                <div class="checkbox">
+                <label><input type= "checkbox" value="">Column 1</label>
+                <label class="checkbox-inline"><input type="checkbox" value="">Column 2</label>
+                </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Column 3</label>
+                 <label class="checkbox-inline"><input type="checkbox" value="">Column 4</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">Column 5</label>
+                 <label class= "checkbox-inline"><input type="checkbox" value=""></i>Column 6</label>
+              </div>
+              <div>
+              <div>
+      <select id="dynamicDropDown1">
+          <option>Score</option>
+      </select>
+      </div>
+      <div>
+      <select id="dynamicDropDown2">
+          <option>Alert</option>
+      </select>
+      </div>
+      <div>
+      <select id="dynamicDropDown3">
+          <option>Escalation</option>
+      </select>
+      </div>
+              
+
+
+ 
+              
+      </div>
+    </div>
+  </form>
+</body>
+
+</html>

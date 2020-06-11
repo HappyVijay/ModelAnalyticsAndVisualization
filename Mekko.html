@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+  <title>Treemap layout (squarify ratios)</title>
+</head>
+
+<style>
+#content {
+  width: 850px;
+  height: 680px;
+}
+rect {
+  fill: darkblue;
+  opacity: 0.3;
+  stroke: white;
+}
+text {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 12px;
+}
+g text {
+  fill: white;
+  font-size: 10px;
+}
+</style>
+
+<body>
+  <div id="content"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+  <script>
+var data = {
+  "name": "1",
+  "children": [{"name": "1.1","children": [{"name": "1.1.1","size": 100},{"name": "1.1.2","size": 300},{"name": "1.1.3","size" : 240 }]},{"name": "1.2","children": [{"name": "1.2.1","size": 110},{"name": "1.2.2","size": 340},{"name": "1.2.3","size" : 40 }]}]
+};
+
+var width = 420, height = 340;
+
+var ratios = [1];
+
+var treemapLayout = d3.treemap()
+  .size([400, 300])
+  .paddingOuter(0);
+
+
+var layouts = ['treemapSliceDice'];
+
+var rootNode = d3.hierarchy(data)
+rootNode.sum(function(d) {
+  return d.size;
+});
+
+
+
+
+function enteringTreemap(d) {
+
+  treemapLayout.tile(d3[d])
+  treemapLayout(rootNode);
+
+
+  d3.select(this)
+    .append('text')
+    .text(function(d) {return 'Ratio = ' + d})
+    .attr('dy', 14)
+
+  var nodes = d3.select(this)
+    .append('g')
+    .attr('transform', 'translate(0, 20)')
+    .selectAll('g')
+    .data(rootNode.descendants())
+    .enter()
+    .append('g')
+    .attr('transform', function(d) {return 'translate(' + [d.x0, d.y0] + ')'})
+
+  nodes
+    .append('rect')
+    .attr('width', function(d) { return d.x1 - d.x0; })
+    .attr('height', function(d) { return d.y1 - d.y0; })
+
+  nodes
+    .append('text')
+    .attr('dx', 4)
+    .attr('dy', 14)
+    .text(function(d) {
+      return d.data.name;
+    })
+}
+
+var treemaps = d3.select('#content')
+  .selectAll('svg')
+  .data(layouts)
+  .enter()
+  .append('svg')
+  .attr('width', width + 'px')
+  .attr('height', height + 'px')
+  .each(enteringTreemap)
+
+
+  </script>
+</body>
+</html>
