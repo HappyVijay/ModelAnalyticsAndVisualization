@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  
+}
+.table1 {
+	padding-top: 0px;  
+  column-width: 1000px;
+  border-width: 100px;
+}
+
+.table2 {
+  border-spacing: 1px;
+  padding-left: 500px;
+  vertical-align: center;
+  alignment-baseline: central;
+}
+
+.cf{
+
+  padding-top: 0px;
+}
+
+
+
+</style>
+
+
+</head>
+<body>
+
+<h2 style = "text-align: center;" style="width:50%;float:right">Escalated Summary Statistics</h2>
+
+<div class = "table2" style="width:50%;float:left">
+  <table >
+  <tr>
+    <th>Escalations per Surveillance</th>
+    
+  </tr>
+  <tr>
+    <td>2456</td>
+    
+  </tr>
+</table>
+</div>
+
+<section>
+ <div class = "table1" id = "table1" style="width:50%;float:left">
+
+            <script type = "text/javascript">
+                tabledata();
+            </script>
+        </div>
+</section>
+
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script type="text/javascript">
+
+d3.text("https://raw.githubusercontent.com/hxchua/datadoubleconfirm/master/datasets/arrivals2018.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+
+
+
+</script>
+
+
+
+<table class = "cf" style="width:50%;float:right">
+<thead>
+  <tr class>
+  <th rowspan="3"></th>
+  <td colspan="3" style="text-align: center;">Predicted</td> 
+  </tr>
+</thead>
+<tbody>
+  <tr>
+   <td rowspan="3">Actual</td>
+   <td></td>
+    <th >Non-Escalated</th>
+    <th>Escalated</th>
+  </tr>
+  <tr>
+    <th>Non-Escalated</th>
+    <td class="table-success">390(96.06%)</td>
+    <td class="table-danger">12(2.96%)</td>
+  </tr>
+   <tr>
+    <th>Escalated</th>
+    <td class="table-danger">1(0.25%)</td>
+    <td class="table-success">3(0.74%)</td> 
+  </tr>
+</tbody>
+</table>
+
+
+</body>
+</html>
