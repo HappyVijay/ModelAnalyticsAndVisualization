@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          
+        }
+        .table1 {
+            padding-top: 0px;  
+          column-width: 1000px;
+          border-width: 100px;
+        }
+        
+        .table2 {
+          border-spacing: 1px;
+        }
+        .rangeslider{ 
+            width: 50%; 
+            padding-left: 800px;
+            padding-top: 0px;
+        } 
+        
+        .div1 {
+          width: 120px;
+          height: 20px;
+          border: 1px solid blue;
+         
+        }
+        
+        .div2 {
+          width: 120px;
+          height: 20px;
+          border: 1px solid blue;
+        }
+        
+        
+        
+        </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                DIV1
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                      <th>Total Cases per Surveillance</th>
+                      <th>Alerts per Surveillance</th> 
+                      <th>Alerts vs Overall</th>
+                      <th>Alerts per business review</th>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>2456</td>
+                      <td>8000</td>
+                      <td>5674</td>
+                      <td>4000</td>
+                    </tr>
+                </tbody>
+                  </table>
+                  
+            </div>
+            <div class="col">
+                
+                <table class="table table-bordered">
+                    <tr>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "div3" id = "ratio">
+                            2.5
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="div1" id="value1">
+                            Alert: 50
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class = "div2" id="value2">
+                            Escalation: 20
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class = "div2" id="value2">
+                            <input type="range" min="1" max="100" value="0"
+                            class="myslider" id="sliderRange"> 
+            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                        Cuttoff: <span id="demo"></span>
+                    </td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Features</th>
+                        <th scope="col">Mean</th>
+                        <th scope="col">Median</th>
+                        <th scope="col">Standard Deviation</th>
+                        <th scope="col">Variance</th>
+                        <th scope="col">MAD</th>  
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Feature 1</th>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+  
+                    </tr>
+                    <tr>
+                        <th scope="row">Feature 2</th>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+  
+                    </tr>
+                    <tr>
+                        <th scope="row">Feature 3</th>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+                        <td>10</td>
+  
+                    </tr>
+  
+                    </tbody>
+                  </table>
+            </div>
+            
+
+            <div class="col">
+                Div4
+            </div>
+            
+        </div>
+        
+    </div>        
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script type="text/javascript">
+
+var rangeslider = document.getElementById("sliderRange"); 
+var output = document.getElementById("demo");
+
+var output2 = document.getElementById("value1"); 
+var output3 = document.getElementById("value2"); 
+output.innerHTML = rangeslider.value; 
+  
+rangeslider.oninput = function() { 
+  output.innerHTML = this.value;
+  var value1 = (95 + this.value / 10);
+  document.getElementById('value1').innerHTML = "Alert:  " + value1;
+  var value2 = (value1-50).toFixed(2);
+  document.getElementById('value2').innerHTML = "Escalation:  " + value2;
+  var ratio = (value1/value2).toFixed(4);
+  document.getElementById('ratio').innerHTML = "Ratio:  " + ratio;
+}
+</script>
+
+</body>
+</html>
+
+
+
