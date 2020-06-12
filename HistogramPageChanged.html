@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Business Review Summary</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.js"></script>
+    
+  </head>
+  
+<!----------------------------------------------------------------------------------------->
+
+  <body>
+    <!-------Nav Bar 1--------------->
+    <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
+        <button class="navbar-toggler" id="navbarbtn" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    
+    <!-------Nav Bar 2--------------->
+    <nav id = "navone" style = "float: left;" class="border border-dark">
+    <div class="sidebar-sticky" style="height: 100%;">
+        <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
+            <li class="nav-item myid">
+            <a class="nav-link active text-black" href="home.html" style="margin-left: 0px;" id = "navbaroptions">
+                Home <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item myid">
+            <a class="nav-link text-black" href="visualizations.html">
+                Visualizations
+            </a>
+            </li>
+            <li class="nav-item myid" id = "myid1">
+            <a class="nav-link text-black" href="#">
+                Summary Statistics
+            </a>
+            </li>
+            <li class="nav-item summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Non Alerts
+            </a>
+            </li>              
+            <li class="nav-item   summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Alerts
+            </a>
+            </li>
+            <li class="nav-item   summarystatistics myid">
+            <a class="nav-link text-black" href="#">
+                Escalations
+            </a>
+            </li>
+            <div id="summarystatisticsexpand">
+            <li class="nav-i    tem  myid">
+            <a class="nav-link text-black" href="data.html">
+                Data
+            </a>
+            </li>
+
+        </ul>
+    <!-------Nav Bar 3--------------->    
+        <div style="height: 100%; padding: 0; background-color: rgb(80, 170, 248);">
+            <hr class="bg-light" >
+            <ul class="nav flex-column ">
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="faq.html">
+                FAQ's
+            </a>
+            </li>
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="#">
+                About
+            </a>
+            </li>
+            <li class="nav-item navbaroptions myid">
+            <a class="nav-link text-dark " href="#">
+                Log out
+            </a>
+            </li>
+            </ul>
+        </div>
+    </div>
+    </nav>
+    
+    <div class="container-fluid"> </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="faqaccordion.js"></script> 
+    <script src="slider.js"></script>
+    <!-- This is for Icons ------------>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>feather.replace()</script>
+
+
+    <div id="histoSpace" style="border:solid 1px black; width:fit-content;position: absolute;transform: translate(45%,5%);"></div>
+    <div><h1 style="position: absolute;transform: translate(1000px,50px);">Histogram Visualization <br> for Business Reviews</h1></div>
+    <div><h4 style="position: absolute;transform: translate(1000px,250px);">1. How to read this graph  <br> 2. What each business Review means <br> 3. Inferences </h4></div>
+
+    <!---------Histogram------------------------------------------>
+<script>
+    d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function(data) {
+        var margin = {top: 10, right: 30, bottom: 30, left: 40},
+        width = 600 - margin.left - margin.right,
+        height = 600 - margin.top - margin.bottom;
+        
+        // append the svg object to the body of the page
+        var svg = d3.select("#histoSpace")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")"); 
+        
+        // X axis: scale and draw:
+        var x = d3.scaleLinear()
+        .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+        .range([0, width]);
+        svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+        
+        // set the parameters for the histogram
+        var histogram = d3.histogram()
+        .value(function(d) { return d.price; })   // I need to give the vector of value
+        .domain(x.domain())  // then the domain of the graphic
+        .thresholds(x.ticks(70)); // then the numbers of bins
+        
+        // And apply this function to data to get the bins
+        var bins = histogram(data);
+        
+        // Y axis: scale and draw:
+        var y = d3.scaleLinear()
+        .range([height, 0]);
+        y.domain([0, d3.max(bins, function(d) { return d.length; })]);   // d3.hist has to be called before the Y axis obviously
+        svg.append("g")
+        .call(d3.axisLeft(y));
+        
+        // append the bar rectangles to the svg element
+        svg.selectAll("rect")
+        .data(bins)
+        .enter()
+        .append("rect")
+        .attr("x", 1)
+        .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; })
+        .attr("width", function(d) { return x(d.x1) - x(d.x0) -1 ; })
+        .attr("height", function(d) { return height - y(d.length); })
+        .style("fill", "#69b3a2")
+    });
+</script>
+</body>
+</html>
