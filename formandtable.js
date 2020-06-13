@@ -1,5 +1,5 @@
 $.each(["one", "two"], function(i, value){
-    console.log(value + 'array');
+    
 });
 
 
@@ -26,35 +26,46 @@ function insertData(event){
         {
         var employee_data = data.split(/\r?\n|\r/);
         columnheaders = employee_data[0].split(",");
-        console.log(columnheaders);
+        //console.log(columnheaders);
 
         
     $.each(columnheaders, function(index, value){
-        console.log(value);
-        $('#checkboxtable').append('<tr class="form-check"> <td> <input class="form-check-input" type="checkbox" value=""><label class="form-check-label">'+value +'</label></td></tr>');
+        //console.log(value);
+        $('#checkboxtable1').append('<tr class="form-check"> <td> <input class="form-check-input" type="checkbox" value=""><label class="form-check-label">'+value +'</label></td></tr>');
         $('.dropdown-menu1').each(function(index, element){
-            console.log(element);
+            //console.log(element);
             $(this).append('<a class="dropdown-item dropdown-item1" href="#">'+value+'</a>');
         })
         $('.dropdown-menu2').each(function(index, element){
-            console.log(element);
+            //console.log(element);
             $(this).append('<a class="dropdown-item dropdown-item2" href="#">'+value+'</a>');
         })
         $('.dropdown-menu3').each(function(index, element){
-            console.log(element);
+            //console.log(element);
             $(this).append('<a class="dropdown-item dropdown-item3" href="#">'+value+'</a>');
         })
         $('.dropdown-menu4').each(function(index, element){
-            console.log(element);
+            //console.log(element);
             $(this).append('<a class="dropdown-item dropdown-item4" href="#">'+value+'</a>');
         })
         $('.dropdown-menu5').each(function(index, element){
-            console.log(element);
+            //console.log(element);
             $(this).append('<a class="dropdown-item dropdown-item5" href="#">'+value+'</a>');
         })
 
     });
-            
+
+    $("#checkboxtable").dataTable().fnDestroy();
+
+    $('#checkboxtable').DataTable({
+        "ordering":false,
+        "paging":true,  
+        "lengthMenu":[5, 10],
+        "lengthChange": false,
+        "searching": false
+
+    });
+    
     }
     }
         ); 
@@ -149,4 +160,4 @@ function insertData(event){
         .attr("data-target", "#mymodel");
     }
 
-
+    
