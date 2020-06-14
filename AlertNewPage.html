@@ -1,0 +1,115 @@
+<style>
+        table, th, td {
+          border: 1px solid black;
+          
+        }
+
+        .table-responsive{
+          max-height: 400px;
+        }
+
+
+        
+        </style>
+
+
+  <h2 style="text-align: center">Alert Features Statistics</h2>
+    <div class="container">
+  
+        <div class="row justify-content-center" style="height: 150px;">
+              <!--div for upper 4 stat boxes -->
+            <div id = "stat_box">
+
+            <button type="button" class="btn btn-success">
+              Total Cases per Surveillance <span class="badge badge-light">16397</span>
+            </button>
+
+            <button type="button" class="btn btn-primary">
+              Alerts per Surveillance <span class="badge badge-light">2442</span>
+            </button>
+
+            <button type="button" class="btn btn-warning">
+              Alerts vs Overall <span class="badge badge-light">2442</span>
+            </button>
+
+            <button type="button" class="btn btn-info">
+              Alerts per business review <span class="badge badge-light">1281</span>
+            </button>
+            </div>
+             
+        </div>
+
+      
+       
+
+        <!--second row with button and table-->
+        <div class="row">
+            <div class="col">
+              <div>
+              <div class = "row justify-content-center" style="height: 50px;">
+              <a href="NonAlertPage.html">
+                 <button>Non-Alert</button>
+                  
+              </a>
+            </div>
+              <div class = "row justify-content-center" style="height: 50px;">
+              <a href="AlertStatPage.html">
+                <button>Alerts</button>
+              </a>
+            </div>
+            <div class = "row justify-content-center" style="height: 50px;">
+              <a href="EscalationPage.html">
+                <button>Escalations</button>
+              </a>
+            </div>
+            </div>
+        </div>
+
+
+
+              <div class="col-7.5">
+               
+                <table class = "table-responsive"  id = "table1" >
+                  <thead class="table-primary">
+                  
+
+                  </thead>
+                </table>
+            </div>
+
+
+            <div class="col">
+                <table class="table-primary" >
+                  </table>
+            </div>
+              
+        </div>
+        
+    </div>        
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script>
+
+        d3.text("statistics_of_alert_featurenew.csv", function tabledata(data) {
+
+
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table1")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+
+
+</script>  
