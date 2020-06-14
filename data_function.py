@@ -19,7 +19,7 @@ column = list(df.columns)
 new_columns = []
 if b['f0'] == True:
     j = 0
-    for k in range(0, len(b)):
+    for k in range(0, len(b) - 1):
         new_columns.append(column[j])
         j = j + 1
 else:
