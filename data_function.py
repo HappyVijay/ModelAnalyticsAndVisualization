@@ -25,8 +25,20 @@ if b['f0'] == True:
 else:
     j = 1
     for keys in b:
-        if b[keys] == True:
-            new_columns.append(column[j])
+        if b['f1'] == True:
+          new_columns.append(column[0])
+        if b['f2'] == True:
+          new_columns.append(column[1])
+        if b['f3'] == True:
+          new_columns.append(column[2])
+        if b['f4'] == True:
+          new_columns.append(column[3])
+        if b['f5'] == True:
+          new_columns.append(column[4])
+        if b['f6'] == True:
+          new_columns.append(column[5])
+
+          
         j = j + 1
 
 df_alerts = df[df['has_alerted'] == 1]
