@@ -7,7 +7,18 @@
     <title>Dashboard</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+  
+
+  
   </head>
   <body>
     <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0">
@@ -21,12 +32,12 @@
 
       <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
         <li class="nav-item myid">
-          <a class="nav-link active text-black" href="home.html" style="margin-left: 0px;" id = "navbaroptions">
-            Home <span class="sr-only">(current)</span>
+          <a class="nav-link active text-black" href="/" style="margin-left: 0px;" id = "navbaroptions">
+            Analyze another model <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item myid">
-          <a class="nav-link text-black" href="visualizations.html">
+          <a class="nav-link text-black" href="/visualizations">
             Visualizations
           </a>
         </li>
@@ -36,23 +47,44 @@
           </a>
         </li>
         <li class="nav-item summarystatistics myid">
-          <a class="nav-link text-black" href="#">
+          <a class="nav-link text-black" href="/nonalert">
               Non Alerts
           </a>
         </li>              
         <li class="nav-item   summarystatistics myid">
-          <a class="nav-link text-black" href="#">
+          <a class="nav-link text-black" href="/alert">
             Alerts
           </a>
         </li>
         <li class="nav-item   summarystatistics myid">
-          <a class="nav-link text-black" href="#">
+          <a class="nav-link text-black" href="/escalations">
             Escalations
+          </a>
+        </li>
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="/featureimp">
+            Feature Importance
+          </a>
+        </li>
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="/cfmatrix">
+            View Correlation
+          </a>
+        </li>
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="/confusionmatrix">
+            View Confusion Matrix
+          </a>
+        </li>
+
+        <li class="nav-item   summarystatistics myid">
+          <a class="nav-link text-black" href="/businessaction">
+            View Business Actions
           </a>
         </li>
         <div id="summarystatisticsexpand">
         <li class="nav-i    tem  myid">
-          <a class="nav-link text-black" href="data.html">
+          <a class="nav-link text-black" href="/data">
             Data
           </a>
         </li>
@@ -63,36 +95,41 @@
           <hr class="bg-light" >
           <ul class="nav flex-column ">
         <li class="nav-item navbaroptions myid">
-          <a class="nav-link text-dark " href="faq.html">
-            FAQ's
+          <a class="nav-link text-dark " href="/faq">
+            FAQ
           </a>
         </li>
         <li class="nav-item navbaroptions myid">
-          <a class="nav-link text-dark " href="#">
+          <a class="nav-link text-dark " href="/aboutUs">
               About
           </a>
         </li>
-        <li class="nav-item navbaroptions myid">
-          <a class="nav-link text-dark " href="#">
-              Log out
-          </a>
-        </li>
+
 
       </ul>
       </div>
     </div>
   </nav>
-    <div class="container-fluid">
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="faqaccordion.js"></script> 
-    <script src="slider.js"></script>
-  
-    <!-- This is for Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>feather.replace()</script>
+  {% block body %} {% endblock %}
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/boxplot.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/formandtable.js') }}"></script>
+<!---------Histogram------------------------------------------>
+<script src="{{ url_for('static', filename='js/histogram.js') }}">
+</script>
+
+<!--Box Plot------------------------------------------>
+<script src="{{ url_for('static', filename='js/boxplot.js') }}">
+</script>
+
+<!--Mosaic Plot------------------------------------------>
+<script src = "{{ url_for('static', filename='js/mosaicplot.js') }}">
+</script>
+
+<!--feature imp.------------------------------------------>
+<script src = "{{ url_for('static', filename='js/featureimp.js') }}">
+</script>  
+
 
   </body>
 </html>
