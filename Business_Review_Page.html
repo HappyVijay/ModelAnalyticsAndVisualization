@@ -1,0 +1,90 @@
+<head>
+    <title>Business Reviews Analysis</title>
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></script>
+</head>
+    
+<body style="overflow: hidden;">
+    <!-- Create a div where the graph will take place -->
+    <div class="container-fluid" id="my_dataviz" style="width:fit-content; transform: translate(-170px,10%)"></div>
+    <div class="container-fluid" style="position: relative; left: 370px; top:-500px; width:fit-content;"><h1> <u>Histogram Visualization <br> for Business Reviews</u></h1></div>
+    <div class="container-fluid" style="position: relative; left: 350px; top:-480px; width: fit-content;">
+        <p style="word-wrap:break-word;width:350px">
+            Alerts which have been evaluated and reviewed with a business action have been distributed as given in the graph.<br> <br>This helps us in easily understanding
+            the distribution of alerts and how they are assessed by skilled Analysts.
+        </p>
+    </div>
+</body>
+    
+<script>
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 90, left: 40},
+    width = 600 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+        
+    // append the svg object to the body of the page
+    var svg = d3.select("#my_dataviz")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")")
+
+    // Parse the Data
+    d3.csv("business_review.csv", function(data) {
+        // X axis
+        var x = d3.scaleBand()
+        .range([ 0, width ])
+        .domain(data.map(function(d) { return d.review; }))
+        .padding(1);
+        svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "translate(-5,0)rotate(-25)")
+        .style("text-anchor", "end");
+        
+        //var max=d => color(d.data.frequency)
+        var max=d3.max([1156,102,6,658,43,81,1,395])
+        // Add Y axis
+        var y = d3.scaleLinear()
+        .domain([0,max])
+        .range([height, 0]);
+        svg.append("g")
+        .call(d3.axisLeft(y));
+        
+        // Lines
+        svg.selectAll("myline")
+        .data(data)
+        .enter()
+        .append("line")
+        .attr("x1", function(d) { return x(d.review); })
+        .attr("x2", function(d) { return x(d.review); })
+        .attr("y1", y(0))
+        .attr("y2", y(0))
+        .attr("stroke", "black")
+
+        svg.selectAll("mycircle")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("cy", y(0))
+        .attr("cx", function(d) { return x(d.review); })
+        .attr("r", "7")
+        .style("fill", "purple")
+        .attr("stroke", "black")
+
+        // Change the X coordinates of line and circle
+        svg.selectAll("circle")
+        .transition()
+        .duration(2000)
+        .attr("cy", function(d) { return y(d.frequency);})
+
+        svg.selectAll("line")
+        .transition()
+        .duration(2000)
+        .attr("y1", function(d) { return y(d.frequency); })
+
+    })
+</script>
