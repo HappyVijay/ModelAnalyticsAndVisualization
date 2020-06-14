@@ -1,0 +1,135 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          
+        }
+
+        .table-responsive{
+          max-height: 400px;
+        }
+
+
+        
+        </style>
+
+</head>
+<body>
+
+    <div class="container">
+        DIV1
+        <div class="row">
+            <div class="col">
+              <!--div for upper 4 stat boxes -->
+            <div id = "stat_box">
+
+            <button type="button" class="btn btn-success">
+              Total Cases per Surveillance <span class="badge badge-light">16397</span>
+            </button>
+
+            <button type="button" class="btn btn-primary">
+              Alerts per Surveillance <span class="badge badge-light">2442</span>
+            </button>
+
+            <button type="button" class="btn btn-warning">
+              Alerts vs Overall <span class="badge badge-light">2442</span>
+            </button>
+
+            <button type="button" class="btn btn-info">
+              Alerts per business review <span class="badge badge-light">1281</span>
+            </button>
+            </div>
+           
+           </div> 
+        </div>
+
+        DIV 2
+        <div class = "row">
+          <div class = "col">
+
+          </div>
+        </div>
+
+        <!--second row with button and table-->
+        <div class="row">
+            <div class="col">
+              <div>
+              <div class = "row">
+              <a href="NonAlertPage.html">
+                 <button>Non-Alert</button>
+                  
+              </a>
+            </div>
+              <div class = "row">
+              <a href="AlertStatPage.html">
+                <button>Alerts</button>
+              </a>
+            </div>
+            <div class = "row">
+              <a href="EscalationPage.html">
+                <button>Escalations</button>
+              </a>
+            </div>
+            </div>
+        </div>
+
+
+
+              <div class="col">
+               
+                <table class = "table-responsive"  id = "table1" >
+                  <thead class="table-primary">
+                  
+
+                  </thead>
+                </table>
+            </div>
+
+
+            <div class="col">
+                <table class="table-primary" >
+                  </table>
+            </div>
+              
+        </div>
+        
+    </div>        
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+<script>
+
+        d3.text("https://raw.githubusercontent.com/hxchua/datadoubleconfirm/master/datasets/arrivals2018.csv", function tabledata(data) {
+
+
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table1")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+
+
+</script>  
+
+
+</body>
+</html>
