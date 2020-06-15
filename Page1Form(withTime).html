@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+    <title>Add Model</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/>   
+</head>
+  
+<body>
+    
+<!--------Form Here--------->
+    
+    <div id="formSpace" style="width:50%;" class="container-fluid">
+    <form id="form" onsubmit="insertData();return false" style="border:solid 3px black;" class="pure-form pure-form-aligned">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="aligned-name">Model Name</label>
+                <input id="modelName" style="line-height: 1;" type="text" id="aligned-foo" required/>
+            </div>
+            <div class="pure-control-group">
+                <label for="aligned-foo">Model Description</label>
+                <input id="modelDesc" style="line-height: 1;" type="text" id="aligned-foo" required />
+            </div>
+            <div class="pure-control-group">
+                <label for="myfile">Result File</label>
+                <input type="file" id="modelFile" name="myfile" required> 
+            </div>
+            <div style="margin-left: 280px">
+                <button type="submit"  id="addModel" class="pure-button pure-button-primary">Add Model</button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!----------Table Here------------------------------------------>
+
+<div id="tableSpace" class="container-fluid" style="width:75%; height:250px; overflow:auto; border:solid 3px black;">
+    <fieldset >
+        <table id="myTable" class="table table-hover">      
+            <thead>
+                <tr>
+                    <th scope="col" >Sl. No. </th>
+                    <th scope="col" >Model Name <svg class="bi bi-chevron-expand" onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(2)')" style="cursor:pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                      </svg></th>
+                    <th scope="col">Model Description</th>
+                    <th scope="col" >Created By</th>
+                    <th scope="col" >Date and Time of Creation <svg class="bi bi-chevron-expand" onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(1)')" style="cursor:pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                      </svg></th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>
+                
+            <tbody> 
+                <tr scope="row">  </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+
+<!------------------JS--------------------------------------------------->
+
+</body>
+
+<script>
+    function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+    }
+
+    function clearForm(){
+        document.getElementById("form").reset();
+    }
+    var rowCount=0
+    function insertData(event){
+
+        rowCount=rowCount+1
+        var today = new Date()
+        var date = today.getFullYear()+'/'+today.getMonth()+'/'+today.getDate()
+        var time = today.getHours()+':'+addZero(today.getMinutes())+':'+addZero(today.getSeconds())
+        var modelName = document.getElementById("modelName").value
+        var modelDesc = document.getElementById("modelDesc").value
+        var modelFile = document.getElementById("modelFile")
+
+        var table = document.getElementById ("myTable");
+        var row = table.insertRow (2)
+        row.className="item"
+        var cell1 = row.insertCell (0)
+        var cell2 = row.insertCell (1)
+        var cell3 = row.insertCell (2)
+        var cell4 = row.insertCell (3)
+        var cell5 = row.insertCell (4)
+        var cell6 = row.insertCell(5)
+        cell1.innerHTML = String(rowCount)
+        cell2.innerHTML = String(modelName)
+        cell3.innerHTML = String(modelDesc)
+        cell4.innerHTML = "User"
+        cell5.innerHTML = date +" "+time
+        cell6.innerHTML = ""
+
+        clearForm()
+    }
+
+
+</script>
