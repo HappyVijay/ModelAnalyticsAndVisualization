@@ -6,51 +6,53 @@
 </head>
 <body> 
   <!--Confusion Matrix Here-->
-  <div class="container-fluid" style="transform: translate(250px,10%);">
+  <div class="container-fluid" style="transform: translate(150px,10%);">
     <table class = "cf" style="text-align: center;font-size:20px;width:500px;height:500px">
       <thead>
         <tr class>
         <th rowspan="3"></th>
-        <td colspan="3" style="text-align: center;font-size:20px; text-align: center;width:250px">Predicted</td> 
+        <td colspan="3" style="text-align: center;font-size:20px; text-align: center;width:250px;transform: translateX(50px);">Predicted</td> 
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td rowspan="3">Actual</td>
+          <td rowspan="3" style="transform: translate(-50px,50px);">Actual</td>
           <td></td>
-          <th class="table-active" style="text-align: center;font-size:20px;width:250px">Non-Escalated</th>
-          <th class="table-active" style="text-align: center;font-size:20px; width:250px">Escalated</th>
+          <th class="table-active" style="text-align: center;font-size:20px;width:250px;">Alerted</th>
+          <th class="table-active" style="text-align: center;font-size:20px; width:250px">Non-Alerted</th>
         </tr>
         <tr>
-          <th class="table-active" style="text-align: center;font-size:20px;">Non-Escalated</th>
-          <td class="table-success" style="text-align: center;font-size:20px;">390(96.06%)</td>
-          <td class="table-danger" style="text-align: center;font-size:20px;">12(2.96%)</td>
+          <th class="table-active" style="text-align: center;font-size:20px;">Escalated</th>
+          <td class="table-success" style="text-align: center;font-size:20px;">6 (TP)</td>
+          <td class="table-danger" style="text-align: center;font-size:20px;">0 (FN)</td>
         </tr>
          <tr>
-          <th class="table-active" style="text-align: center;font-size:20px;">Escalated</th>
-          <td class="table-danger" style="text-align: center;font-size:20px;">1(0.25%)</td>
-          <td class="table-success" style="text-align: center;font-size:20px;">3(0.74%)</td> 
+          <th class="table-active" style="text-align: center;font-size:20px;">Non-Escalated</th>
+          <td class="table-danger" style="text-align: center;font-size:20px;">2436 (FP)</td>
+          <td class="table-success" style="text-align: center;font-size:20px;">13954 (TN)</td> 
         </tr>
       </tbody>
     </table>
   </div>
   <!--Text Here-->
   <div class="container" style="transform:translate(400px,-350px); width:fit-content"><h1> <u>Confusion Matrix</u></h1></div>
-  <div class="container-fluid" style="transform:translate(450px,-320px); width:fit-content">
+  <div class="container-fluid" style="transform:translate(450px,-340px); width:fit-content">
       <p style="word-wrap:break-word;width:350px">
         A confusion matrix is a table that is often used to describe the performance of a classification model on a set of test data for which the true values are known. It allows the 
-        visualization of the performance of an algorithm.
+        visualization of the performance of an algorithm. <br>
+        <b>High recall, low precision:</b> This means that most of the positive examples are correctly recognized (low FN) but there are a lot of false positives.
       </p>
   </div>
   <!--Precision and Recall Here-->
-  <div style="transform:translate(1100px,-250px);">
+  <div style="transform:translate(1100px,-290px);">
     <button type="button" class="btn btn-primary">
-      Precision <span class="badge badge-light">xx %</span>
+      Precision <span class="badge badge-light">0.245700 %</span>
     </button>
   </div>
-  <div style="transform: translate(1100px,-230px);">
+  <div style="transform: translate(1100px,-270px);">
     <button type="button" class="btn btn-primary">
-      Recall <span class="badge badge-light">xx %</span>
+      Recall <span class="badge badge-light">100.0 %</span>
     </button>
   </div>
   </body>
+  </html>
