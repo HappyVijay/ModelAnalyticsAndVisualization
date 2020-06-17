@@ -32,15 +32,15 @@
   
   <script>
   
-      // set the dimensions and margins of the graph
-      var margin = {top: 10, right: 10, bottom: 90, left: 260},
-      width = 700 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 10, bottom: 90, left: 260},
+  width = 700 - margin.left - margin.right,
+  height = 500 - margin.top - margin.bottom;
   
   //--------------Alerts----------------------------------
   
   // Parse the Data
-  d3.csv("feature_imp_escalations.csv", function(data) {
+  d3.csv("feature_imp_alert.csv", function(data) {
       // append the svg object to the body of the page
       var svg = d3.select("#my_dataviz1")
       .append("svg")
@@ -62,10 +62,11 @@
       .style("text-anchor", "end")
       .style("font-size","0.2cm")
       
+      var max=d3.max(data, function(d) { return +d.importances; })
       // Y axis
       var y = d3.scaleLinear()
       .range([ height,0 ])
-      .domain([0,35])
+      .domain([0,max+5])
       svg.append("g")
       .call(d3.axisLeft(y))
       
@@ -91,7 +92,7 @@
       }
       var mousemove2 = function(d) {
       Tooltip2
-      .html("Value: <br> " + d.importances)
+      .html(d.importances)
       .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
       .style("transform","translate(100%,-100%)")
@@ -132,7 +133,7 @@
   //--------------Escalations----------------------------------
   
   // Parse the Data
-  d3.csv("feature_imp_alert.csv", function(data) {
+  d3.csv("feature_imp_escalations.csv", function(data) {
       // append the svg object to the body of the page
       var svg = d3.select("#my_dataviz2")
       .append("svg")
@@ -183,7 +184,7 @@
       }
       var mousemove2 = function(d) {
       Tooltip2
-      .html("Value: <br> " + d.importances)
+      .html(d.importances) 
       .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
       .style("transform","translate(100%,-100%)")
