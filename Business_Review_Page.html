@@ -1,27 +1,41 @@
-<head>
-    <title>Business Reviews Analysis</title>
-    <!-- Load d3.js -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Business Review Page</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"></script>
-</head>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+  
+  </head>
     
 <body>
-    <!-- Create a div where the graph will take place -->
-    <div class="container-fluid" id="my_dataviz" style="width:fit-content; transform: translate(-100px,8%)"></div>
-    <div class="container-fluid" style="position: relative; left: 430px; top:-490px; width:fit-content;"><h1> <u>Visualization <br> for Business Reviews</u></h1></div>
-    <div class="container-fluid" style="position: relative; left: 450px; top:-480px; width: fit-content;">
-        <p style="word-wrap:break-word;width:350px">
-            Alerts which have been evaluated and reviewed with a business action have been distributed as given in the graph.<br> <br>This helps us in easily understanding
-            the distribution of alerts and how they are assessed by skilled Analysts.
-        </p>
+    <div class="container-fluid" style="position: absolute; transform:translate(95%, 20%);">
+      <svg class="bi bi-question-square-fill" width="2.5em" height="2.5em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" onclick="displayDoc()">
+      <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm4.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z"/>
+      </svg>
     </div>
+    <!-- Create a div where the graph will take place -->
+    <div class="container-fluid" id="my_dataviz" style="width:fit-content; transform: translate(20%,18%)"></div>
+    <div class="container" style="transform: translate(35%,-1450%)"><h1> <u>Visualization for Business Reviews</u></h1></div>
+
 </body>
     
 <script>
     // set the dimensions and margins of the graph
     var margin = {top: 10, right: 30, bottom: 90, left: 40},
     width = 600 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 550 - margin.top - margin.bottom;
         
     // append the svg object to the body of the page
     var svg = d3.select("#my_dataviz")
@@ -42,13 +56,13 @@
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
       .selectAll("text")
-      .attr("transform", "translate(-5,0)rotate(-25)")
+      .attr("transform", "translate(-5,0)rotate(-20)")
       .style("text-anchor", "end");
         
-      //var max=d3.max([1156,102,6,658,43,81,1,395])
+      var max=d3.max(data, function(d) { return +d.frequency; })
       // Add Y axis
       var y = d3.scaleLinear()
-      .domain([0,1250])
+      .domain([0, max+50])
       .range([height, 0]);
       svg.append("g")
       .call(d3.axisLeft(y));
@@ -75,7 +89,7 @@
       }
       var mousemove = function(d) {
       Tooltip
-      .html("Value: <br> " + d.frequency)
+      .html(d.frequency)
       .style("left", (d3.mouse(this)[0]+100) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
       .style("transform","translate(-100%,-100%)")
@@ -105,7 +119,7 @@
       .append("circle")
       .attr("cy", y(0))
       .attr("cx", function(d) { return x(d.review); })
-      .attr("r", "10")
+      .attr("r", "12")
       .style("fill", "purple")
       .attr("stroke", "black")
 
