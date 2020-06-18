@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <button type="button" class="glyphicon glyphicon-question-sign" style="background-color:black;color:white;height: 40px;width:40px" data-toggle="modal" data-target="#exampleModalLong"></button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="text-primary" class="modal-title" id="exampleModalLongTitle" style="text-align: center">How to Read</h2>
+        <button type="button" style="transform:translate(0%,-40px);" class="close" data-dismiss="modal" aria-label="Close">&times</button>
+      </div>
+    
+      <div class="modal-body">
+        <p>A boxplot is a standardized way of displaying the distribution of data based on a five number summary (“minimum”, first quartile (Q1), median, third quartile (Q3), and “maximum”). It can tell you about your outliers and what their values are. It can also tell you if your data is symmetrical, how tightly your data is grouped, and if and how your data is skewed.</p>
+        <p><span style="color: #ff0000">Median (Q2/50th Percentile)</span>: the middle value of the dataset.</p>
+        <p><span style="color: #ff0000">First quartile (Q1/25th Percentile)</span>: the middle number between the smallest number (not the “minimum”) and the median of the dataset.</p>
+        <p><span style="color: #ff0000">Third quartile (Q3/75th Percentile)</span>: the middle value between the median and the highest value (not the “maximum”) of the dataset.</p>
+        <p><span style="color: #ff0000">Interquartile range (IQR)</span>: 25th to the 75th percentile.</p>
+        <p><span style="color: #ff0000">Whiskers </span>(shown in blue)</p>
+        <p><span style="color: #ff0000">Outliers </span>(shown as green circles)</p>
+        <p><span style="color: #ff0000">Maximum</span>: Q3 + 1.5*IQR</p>
+        <p><span style="color: #ff0000">Minimum</span>: Q1 -1.5*IQR</p>
+        <p class = "bg-danger">But box plots are not affected by data’s distribution. When the data “morph” but manage to maintain their stat summaries (medians and ranges), their box plots stay the same.</p>
+        <p>This is when violin graphs, or violin plots, come to the rescue. A violin plot carry all the information that a box plot would — it literally has a box plot inside the violin — but doesn’t fall into the distribution trap.</p>
+        <p><span style="color: #ff0000">Strip plots </span>are a form of scatter plots using only 1 expression. When a data set is not too large, plotting every instance of a dimension over a single metric can be a useful exercise for reviewing a distribution and discovering outliers in the data. This raw data view can also be combined with summary information like the mean or median of a set of values from the box plot. It is useful to compare multiple strip plots side by side.</p>
+
+        <p>For better understanding of the box plots<a href = "https://towardsdatascience.com/understanding-boxplots-5e2df7bcbd51"> click here.</a></p>
+        <p>For better understanding of the violin plots<a href = "https://medium.com/@bioturing/5-reasons-you-should-use-a-violin-graph-31a9cdf2d0c6#:~:text=Violin%20graph%20is%20like%20box%20plot%2C%20but%20better&text=They%20show%20medians%2C%20ranges%20and,are%20all%20over%20the%20place.&text=This%20is%20when%20violin%20graphs,plots%2C%20come%20to%20the%20rescue."> click here.</a></p>
+        <p>For better understanding of the strip plots<a href = "https://www.axisgroup.com/data-industry-insights-blog/strip-plots#:~:text=Strip%20plots%20are%20a%20form,discovering%20outliers%20in%20the%20data.1"> click here.</a></p>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
