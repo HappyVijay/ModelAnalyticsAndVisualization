@@ -106,6 +106,8 @@ var myColor = d3.scaleLinear()
     .style("border-radius", "5px")
     .style("padding", "5px")
 
+
+
   // Three function that change the tooltip when user hover / move / leave a cell
   var mouseover = function(d) {
     tooltip
@@ -147,10 +149,18 @@ var myColor = d3.scaleLinear()
     .on("mousemove", mousemove)
     .on("mouseleave", mouseleave)
 
-
-
-
-
+     svg.selectAll()
+    .data(data, function(d) {return d.group+':'+d.variable;})
+    .enter()
+    .append("text")
+    .attr("dy", ".32em")
+    .attr("x", function(d) { return x(d.group) + 10})
+    .attr("y", function(d) { return y(d.variable) + 35})
+    .attr("text-anchor", "center")
+    .text(function(d, i) { return Number.parseFloat(d.value).toFixed(3)})
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)
 
 });
 
@@ -257,23 +267,18 @@ var myColor = d3.scaleLinear()
     .on("mouseleave", mouseleave)
 
 
-
-svg.append("text")
-        .attr("x", 0)
-        .attr("y", -50)
-        .attr("text-anchor", "left")
-        .style("font-size", "22px")
-     
-
-// Add subtitle to graph
-svg.append("text")
-        .attr("x", 0)
-        .attr("y", -20)
-        .attr("text-anchor", "left")
-        .style("font-size", "14px")
-        .style("fill", "grey")
-        .style("max-width", 400)
-       
+    svg.selectAll()
+    .data(data, function(d) {return d.group+':'+d.variable;})
+    .enter()
+    .append("text")
+    .attr("dy", ".32em")
+    .attr("x", function(d) { return x(d.group) + 10})
+    .attr("y", function(d) { return y(d.variable) + 35})
+    .attr("text-anchor", "center")
+    .text(function(d, i) { return Number.parseFloat(d.value).toFixed(3)})
+    .on("mouseover", mouseover)
+    .on("mousemove", mousemove)
+    .on("mouseleave", mouseleave)      
 
 });
 // Add title to graph
