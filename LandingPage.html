@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dashboard</title>
+    <style>
+
+        body {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .box {
+          font: 10px sans-serif;
+        }
+        
+        .box line,
+        .box rect,
+        .box circle {
+          fill: steelblue;
+          stroke: #000;
+          stroke-width: 1px;
+        }
+        
+        .box .center {
+          stroke-dasharray: 3,3;
+        }
+        
+        .box .outlier {
+          fill: none;
+          stroke: #000;
+        }
+        
+        .axis {
+          font: 12px sans-serif;
+        }
+         
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+         
+        .x.axis path { 
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+        
+        </style>
+      
+
+
+    <!-- Bootstrap core CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleforboxplot.css') }}">
+    <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+
+  
+  </head>
+  <body style="overflow: hidden;">
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0" style="background-color:black">
+      <button class="navbar-toggler pure-button" id="navbarbtn" style="background-color:black" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+    </nav>
+    <nav id = "navone" style = "float:left;background-color: #0e4752; width:250px" class="border border-dark">
+      <div class="sidebar-sticky" style="height: 1000px;">
+
+      <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
+        <li class="nav-item myid">
+          <a class="nav-link active text-white" href="/" style="margin-left: 0px;" id = "navbaroptions">
+            <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+              <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            </svg>
+            Home <span class="sr-only">(current)</span> 
+          </a>
+        </li>
+        <li>
+          <hr class="bg-light"> 
+        </li>
+        <li class="nav-item myid" id = "myid1">
+          <a class="nav-link text-white" href="/visualizations">
+            Feature Visualizations
+          </a>
+        </li>
+        <li class="nav-item  myid">
+          <a class="nav-link text-white" href="/featureimp">
+            Feature Importance
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/cfmatrix">
+            Correlation Matrix
+          </a>
+        </li>
+        <li class="nav-item  myid">
+          <a class="nav-link text-white" href="/confusionmatrix">
+            Confusion Matrix
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/businessaction">
+            Business Reviews 
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/summarystatistics">
+            Summary Statistics
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/cutoff">
+            Dev Data Analysis
+          </a>
+        </li>
+      <li>
+        <br><br><br> <hr class="bg-light">
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/faq">
+            FAQ
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/aboutUs">
+              About
+          </a>
+        </li>
+    </ul>
+      </div>
+  </nav>
+    <script src="slider.js"></script>
+    <script src="{{ url_for('static', filename='js/formandtable.js') }}"></script>
+
+
+<!----------Jumbotron------------------------------------------>
+
+<div class="jumbotron" style="background-image: url('jumbo.jpg');width:100%; background-size: 100%; background-repeat: no-repeat;">
+    <div class="row">
+        <p style="transform: translateX(38%);font-weight: bold; font-size: 1.2cm; color: white; text-align:center; opacity: 50%; width:60%;background-color:rgb(19, 18, 18);">Welcome to Model Performance <br> Assessment Dashboard</p>
+    </div>       
+</div>
+
+<!----------Pop Up Here------------------------------------------>
+<div class="container-fluid">
+  <!---Buttons -->
+  <div class="row justify-content-center">
+  <button type="button" class="btn" data-toggle="modal" style="color:white; background-color: black;" data-target="#exampleModal">
+    Add Model
+  </button>  
+  </div>
+</div>
+
+             
+<!----------Pop Up------------------------------------------>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel" >Add Model</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div id="formSpace" style="width:max-content;transform: translateX(-3%);" class="container-fluid">
+        <form id="form" onsubmit="return false;" class="pure-form pure-form-aligned">
+          <fieldset>
+            <div class="pure-control-group">
+              <label for="aligned-name">Model Name</label>
+              <input id="modelName" style="line-height: 1;" type="text" id="aligned-foo" />
+          </div>
+            <div class="pure-control-group">
+              <label for="aligned-foo">Model Description</label>
+              <input id="modelDesc" style="line-height: 1;" type="text" id="aligned-foo"  />
+            </div>
+            <div class="pure-control-group">
+              <label for="aligned-name">Surveillance Name</label>
+              <input id="modelName" style="line-height: 1;" type="text" id="aligned-foo" />
+            </div>
+            <div class="pure-control-group">
+              <label for="aligned-name">Surveillance Type</label>
+              <input id="modelName" style="line-height: 1;" type="text" id="aligned-foo" />
+            </div>
+            <div class="pure-control-group">
+              <label for="myfile">Result File</label> 
+              <input type="file" id="modelFile" name="myfile" required>             
+            </div>
+            <div class="modal-footer">
+              <button type="submit" id="addModel" class="pure-button">Upload File</button>
+              <button type="button" class="btn btn-secondary" onclick="insertData();" data-dismiss="modal">Submit</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>   
+    </div>
+    </div>
+  </div>
+</div>
+
+<!----------Table Here------------------------------------------>
+<div id="tableSpace" class="container-fluid" style="width:75%; height:250px; overflow-y:auto;overflow-x: hidden; transform: translate(3%,5%);">
+  <div class="col" style="transform: translateX(95%);">    
+    <i title="Please click on a Model's Name to analyse it">
+      <svg   class="bi bi-info-circle-fill" width="1.7em" height="1.7em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+      </svg>
+    </i>
+  </div> 
+    <fieldset>
+        <table id="myTable" class="table table-hover">      
+            <thead style="background-color: #0e4752;">
+                <tr style="border:solid 1px black;border:solid 3px black">
+                    <th scope="col"  style="color:white">Sl. No. </th>
+                    <th scope="col"  style="color:white" >Model Name <svg class="bi bi-chevron-expand" onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(2)')" style="cursor:pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                      </svg></th>
+                    <th scope="col"  style="color:white">Model Description</th>
+                    <th scope="col"  style="color:white" >Created By</th>
+                    <th scope="col"   style="color:white">Date and Time of Creation <svg class="bi bi-chevron-expand" onclick="w3.sortHTML('#myTable', '.item', 'td:nth-child(1)')" style="cursor:pointer" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.646 9.146a.5.5 0 0 1 .708 0L8 12.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zm0-2.292a.5.5 0 0 0 .708 0L8 3.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708z"/>
+                      </svg></th>
+                    <th scope="col"> </th>
+                    <th scope="col"> </th>
+                </tr>
+            </thead>                
+            <tbody> 
+                <tr scope="row">
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+</body>
+
+<!------------------JS--------------------------------------------------->
+<script>
+    function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+    }
+
+    function clearForm(){
+        document.getElementById("form").reset();
+    }
+
+    var rowCount=0
+    function insertData(event){
+        rowCount=rowCount+1
+        var today = new Date()
+        var date = today.getFullYear()+'/'+today.getMonth()+'/'+today.getDate()
+        var time = today.getHours()+':'+addZero(today.getMinutes())+':'+addZero(today.getSeconds())
+        var modelName = document.getElementById("modelName").value
+        var modelDesc = document.getElementById("modelDesc").value
+        var modelFile = document.getElementById("modelFile")
+
+        var table = document.getElementById ("myTable");
+        var row = table.insertRow (2)
+        row.className="item"
+        var cell1 = row.insertCell (0)
+        var cell2 = row.insertCell (1)
+        var cell3 = row.insertCell (2)
+        var cell4 = row.insertCell (3)
+        var cell5 = row.insertCell (4)
+        var cell6 = row.insertCell(5)
+        var cell7 = row.insertCell(6)
+        cell1.innerHTML = String(rowCount)
+        cell2.innerHTML = String(modelName)
+        cell3.innerHTML = String(modelDesc)
+        cell4.innerHTML = "User"
+        cell5.innerHTML = date +" "+time
+        cell6.innerHTML = '<a href="#"><svg class="bi bi-pencil" style="color:black" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"/><path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"/></svg></a>'
+        cell7.innerHTML = '<a href="#"><svg class="bi bi-trash-fill" style="color:black" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>/svg></a>'
+        clearForm()
+    }
+
+</script>
