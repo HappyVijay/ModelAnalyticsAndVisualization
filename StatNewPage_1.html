@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dashboard</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+    
+  </head>
+  <body>
+
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script> 
+     <script src="https://d3js.org/d3.v4.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+</body>    
+<body>
+
+      <style>
+            table {
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            th, td {
+              text-align: left;
+              padding: 8px;
+            }
+
+            tr:nth-child(odd) {background-color: #73B8F0;}
+</style>
+  <div class = "container" style="height:70px;width:350px" >
+         <!--second row with button and table-->
+        <div class="row justify-content-center" style="transform: translate(35px,20px);">
+              <div class = "col">
+                 <button id = "nonalert" class="pure-button pure-button-primary">Non-Alert</button>
+              </div>
+              <div class = "col">
+                <button id = "alert" class="pure-button pure-button-primary">Alerts</button>
+                </div>
+              <div class = "col">
+                <button id = "escalation" class="pure-button pure-button-primary" style="transform: translateX(-30px);">Escalations</button>
+              </div>
+  
+            </div>
+      </div>
+  
+      <!--alerts-->
+    <div class="container" id = "alertdiv" style="transform: translate(35px,-10px);">
+      <div class = "row">
+        <div class = "col">
+        <h2 style="text-align: center;transform: translate(0%,60%)  ">Alert Features Statistics</h2>
+        <div class="row justify-content-center" style="height: 100px;transform: translate(0%,30%)">
+              <!--div for upper 4 stat boxes -->
+            <div id = "stat_box">
+            <button type="button" class="btn btn-success">
+              Total Cases per Surveillance <span class="badge badge-light">16397</span>
+            </button>
+
+            <button type="button" class="btn btn-primary">
+              Alerts per Surveillance <span class="badge badge-light">2442</span>
+            </button>
+            </div>
+           </div>  
+         </div>
+        </div>
+
+         <div class="row">
+            <div class="col" >
+                <table id = "table1" class="pure-table pure-table-bordered" >
+                  <thead >
+                  </thead>
+                </table>
+            </div>     
+        </div>    
+      </div>    
+         
+
+<script>
+     d3.text("statistics_of_alert_feature_new.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table1")
+                    .append("table")                     
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; })
+                      
+
+            });
+</script> 
+
+    
+    <div class="container" id = "escalationdiv" style="display:none; height: 50px;transform: translate(35px,20px);">
+      <div class = "row">
+        <div class="col">
+      <h2 style="text-align: center"> Escalation Features Statistics</h2>
+         <div class="row " >
+              <!--div for upper 1 escalated stat boxes -->
+            <div id = "stat_box">
+            <button type="button" class="btn btn-success" style="transform: translate(180%,-10%);">
+             Escalations per Surveillance <span class="badge badge-light">6</span>
+            </button>
+            </div>
+          </div>
+           
+           </div> 
+        </div>
+        <!--second row with button and table-->
+        <div class="row" style="transform:translate(0%,10%);">
+            <div class="col" >
+                <table id = "table3" class="pure-table pure-table-bordered" >
+                  <thead >
+                  </thead>
+                </table>
+            </div>     
+        </div>      
+    </div>        
+
+<script>
+        d3.text("statistics_of_escalated_feature_new.csv", function tabledata(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table3")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+</script>  
+
+<div class="container" id = "nonalertdiv" style="display: none;transform: translate(200px,20px);">
+
+      <div vlass = "row">
+        <div class = "row">
+          <div class = "col">
+            <h2 style="transform: translate(18%,0%);">Non-Alert Features Statistics</h2>
+          </div>
+        </div>
+          <div class = "row">
+            <div class = "col">
+            <button type="button" class="btn btn-success" style="transform: translate(100%,0px);">
+            Non-Alerts per Surveillance <span class="badge badge-light">13954</span>
+            </button>
+          </div>
+          </div>
+        </div>
+           
+        <div class = "row">
+              <div class="col" style="transform:translate(-12%,10%);">
+                <table id = "table2" class="pure-table pure-table-bordered">
+                  <thead>
+                  </thead>
+                </table>
+            </div>
+          </div> 
+
+        </div>   
+        
+
+<script>
+    d3.text("statistics_of_nonalert_feature_new.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table2")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+</script> 
+
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+  
+  $('#escalation').click(function(){
+     
+      $('#escalationdiv').show();
+      $('#alertdiv').hide();
+      $('#nonalertdiv').hide();
+      
+  });
+
+   $('#alert').click(function(){
+     
+      $('#escalationdiv').hide();
+      $('#alertdiv').show();
+      $('#nonalertdiv').hide();
+      
+  });
+
+      $('#nonalert').click(function(){
+     
+      $('#escalationdiv').hide();
+      $('#alertdiv').hide();
+      $('#nonalertdiv').show();
+     
+      
+  });
+
+</script>
+
+
+</body>
+</html>
