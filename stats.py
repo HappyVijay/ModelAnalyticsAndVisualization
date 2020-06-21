@@ -291,7 +291,7 @@ def confusion_metrix(id):#testing done
 	accuracy = accuracy*100
 	precision = precision*100
 	recall = recall*100
-	return(matrix,accuracy,precision,recall)
+	return(tp,fp,fn,tn,accuracy,precision,recall)
 	
 #function to return alerts and non alerts depending upon cut-off
 def alerts_non_alerts_cutoff(id):#testing done
