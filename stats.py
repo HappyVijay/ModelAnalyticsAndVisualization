@@ -8,12 +8,22 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-import seaborn as sn
 import csv  
 from flask import jsonify
+import shutil
+import os
+import stat
 
 
-
+def feature_list(features):
+	features.replace(" ", "")
+	features = features.split(',')
+	up_feature = []
+	for fat in features:
+		if(fat != ""):
+			up_feature.append(fat)
+	features = up_feature
+	return(features)
 
 
 #returns whole data of id from database
@@ -64,6 +74,20 @@ def updatedata(features,Score, status,alerts,bunessAction,escalation,id):#testin
 	con.commit()
 	con.close()
 
+
+
+def delete_model(id):
+	path = os.getcwd()
+	path += "/static/" +str(id)
+	#print(path)
+	os.chmod(path, 0o777)
+	shutil.rmtree(path, ignore_errors=True)
+	con = sqlite3.connect("Model.db")
+	c = con.cursor()
+	c.execute("DELETE FROM Models where id = ?",id)
+	con.commit()
+	con.close()
+
 #mean, Q1, median, Q3, interQuantileRange, min, max,STD = statistics_of_feature(df[columns[0]])//data for value of column
 #and returns data in below order
 #reurns mean, Q1, median, Q3, interQuantileRange, min, max,STD,MAD
@@ -72,16 +96,9 @@ def updatedata(features,Score, status,alerts,bunessAction,escalation,id):#testin
 #flag = 3 is for escalations
 def statistics_of_all_feature(id,flag, outputfile):
 	data = get_data_by_id(id)
-	features = data[6]
+	features =feature_list(data[6])
 	file = data[4]
-	features.replace(" ", "")
-	features = features.split(',')
-	up_feature = []
-	for fat in features:
-		if(fat != ""):
-			up_feature.append(fat)
-	features = up_feature
-	statistics = []
+	
 	alert_flag = data[9]
 	df = pd.read_csv(file)
 	escalation_flag= data[11]
@@ -92,6 +109,10 @@ def statistics_of_all_feature(id,flag, outputfile):
 	else:
 		df = df[df[escalation_flag] == 1]
 
+	calculate_stats(df,features,outputfile);
+	
+	
+def calculate_stats(df,features,outputfile):
 	f= open(outputfile,"w+")
 	f.write("feature_name,mean, Q1, median, Q3, interQuantileRange, min, max,STD,MAD\n")
 	for fname in features:
@@ -111,7 +132,6 @@ def statistics_of_all_feature(id,flag, outputfile):
 		#statistics.append(((mean[0],2),round(q1[0],median[0], q3[0],interQuantileRange[0], min[0],max[0],STD[0],MAD[0]))
 		f.write(fname + "," +str(round(mean[0],4))+","+ str(round(q1[0],4)) + "," + str(round(median[0],4)) + "," +str(round(q3[0],4)) + "," + str(round(interQuantileRange[0],4)) + "," +str(round(min[0],4)) + "," + str(round(max[0],4)) + "," + str(round(STD[0],4)) + "," +str(round(MAD[0],4))+"\n")
 	f.close()
-	
 
 #Number of total cases per surveillance scenario
 #Number of Alerts per surveillance scenario
@@ -207,7 +227,7 @@ def feature_imp(id,flag,outputfile):#testing done
 	f.write("features,importances\n")
 	for i in feature_importances_matrix:
 		abc, xyx=i
-		abc = abc*100
+		
 		xyx = xyx*100
 		f.write(str(abc)+","+str(xyx)+"\n")
 	f.close()
@@ -220,14 +240,7 @@ def feature_imp(id,flag,outputfile):#testing done
 def correlation_mat(id, flag,outputfile): #testing done
 	data = get_data_by_id(id)
 	file = data[4]
-	features = data[6]
-	features.replace(" ", "")
-	features = features.split(',')
-	up_feature = []
-	for fat in features:
-		if(fat != ""):
-			up_feature.append(fat)
-	features = up_feature
+	features =feature_list(data[6])
 	if (flag == 1):
 		mthd = "pearson"
 	else:
@@ -293,38 +306,15 @@ def confusion_metrix(id):#testing done
 	recall = recall*100
 	return(tp,fp,fn,tn,accuracy,precision,recall)
 	
-#function to return alerts and non alerts depending upon cut-off
-def alerts_non_alerts_cutoff(id):#testing done
-	data = get_data_by_id(id)
-	score = data[7]
-	file = data[4]
-	escalation_flag= data[11]
-	df = pd.read_csv(file)
-	f = open("cut_off.csv","w+")
-	f.write("cut_off,alerts,nonalerts,escalations\n")
 
-	df = df[[score,escalation_flag]]
-	for cut_off in range(10,100, 10):
-		nonalerts = len(df[df[score] < cut_off].index)
-		alerts = df[df[score] >= cut_off]
-		alertsnum = len(alerts.index)
-		escnum = len(alerts[alerts[escalation_flag]== 1].index)
-		f.write(str(cut_off) + "," + str(alertsnum)+ "," +str(nonalerts)+ "," +str(escnum) + "\n")
-	f.close()
 
 
 def business_review_boxplot(id, outputfile):
 	data = get_data_by_id(id)
 	status = data[8]
-	features = data[6]
+	features =feature_list(data[6])
 	file = data[4]
-	features.replace(" ", "")
-	features = features.split(',')
-	up_feature = []
-	for fat in features:
-		if(fat != ""):
-			up_feature.append(fat)
-	features = up_feature
+	
 	#print(features)
 	df = pd.read_csv(file)
 	df[status] = df[status].fillna('BLANKS')
@@ -365,15 +355,9 @@ def boxplot_stat(df, features,review,f):
 def violin_business_review(id):
 	data = get_data_by_id(id)
 	status = data[8]
-	features = data[6]
+	features =feature_list(data[6])
 	file = data[4]
-	features.replace(" ", "")
-	features = features.split(',')
-	up_feature = []
-	for fat in features:
-		if(fat != ""):
-			up_feature.append(fat)
-	features = up_feature
+	
 	df = pd.read_csv(file)
 	df[status] = df[status].fillna('BLANKS')
 	statistics = []
@@ -422,3 +406,40 @@ def get_feature_count(id):
 			count +=1
 	features = list(up_feature)
 	return (count)
+
+	#function to return alerts and non alerts depending upon cut-off
+def cutoff_file(id,cutoff):#testing done
+	data = get_data_by_id(id)
+	score = data[7]
+	file = data[4]
+	escalation_flag= data[11]
+	features =feature_list(data[6])
+	alert_flag = data[9]
+	df = pd.read_csv(file)
+	for i in df.index:
+		if df.at[i,score] < cutoff:
+		    df.at[i, alert_flag] = 0
+		else:
+		    df.at[i, alert_flag] = 1
+	arr = file.split(".")
+	name = "static/" + str(id)+"/"
+	name = name + arr[0] +"cutoff.csv"
+	print(name)
+	df.to_csv(name)
+
+	alerted = df[df[alert_flag] == 1]
+	escalated = alerted[alerted[escalation_flag] == 1]
+	non_alerted = df[df[alert_flag] == 0]
+	calculate_stats(alerted,features,"static/" + str(id) + "/statistics_of_alert_feature_cutoff.csv")
+	calculate_stats(non_alerted,features,"static/" + str(id) + "/statistics_of_nonalert_feature_cutoff.csv")
+	calculate_stats(escalated,features,"static/" + str(id) + "/statistics_of_escalated_feature_cutoff.csv")
+	return(len(alerted.index), len(non_alerted.index),len(escalated.index))
+
+def datatoshow(id):
+	data =  get_data_by_id(id)
+	file = data[4]
+	df= pd.read_csv(file)
+	df = df.head(50)
+	df.to_csv("static/"+str(id)+"/data50.csv")
+
+
