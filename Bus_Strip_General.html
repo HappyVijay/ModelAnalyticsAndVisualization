@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Dashboard</title>
+    <style>
+
+        body {
+          font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        
+        .box {
+          font: 10px sans-serif;
+        }
+        
+        .box line,
+        .box rect,
+        .box circle {
+          fill: steelblue;
+          stroke: #000;
+          stroke-width: 1px;
+        }
+        
+        .box .center {
+          stroke-dasharray: 3,3;
+        }
+        
+        .box .outlier {
+          fill: none;
+          stroke: #000;
+        }
+        
+        .axis {
+          font: 12px sans-serif;
+        }
+         
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+         
+        .x.axis path { 
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+        
+        </style>
+      
+
+
+    <!-- Bootstrap core CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+
+
+  
+  </head>
+  <body>
+    <nav class="navbar navbar-dark sticky-top flex-md-nowrap p-0" style="background-color:black">
+      <button class="navbar-toggler pure-button" id="navbarbtn" style="background-color:black" type="button" data-toggle="collapse" data-target="#nav1" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+    </nav>
+    <nav id = "navone" style = "float:left;background-color: #0e4752; width:250px" class="border border-dark">
+      <div class="sidebar-sticky" style="height: 15000px;">
+
+      <ul class="nav flex-column" style="margin-top: 10px; margin-bottom: 110px;">
+        <li class="nav-item myid">
+          <a class="nav-link active text-white" href="/" style="margin-left: 0px;" id = "navbaroptions">
+            <svg class="bi bi-house-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+              <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            </svg>
+            &nbsp; Home <span class="sr-only">(current)</span> 
+          </a>
+        </li>
+        <li>
+          <hr class="bg-light">
+        </li>
+        <li class="nav-item myid" id = "myid1">
+          <a class="nav-link text-white" href="/visualizations">
+            <svg class="bi bi-graph-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+              <path fill-rule="evenodd" d="M14.39 4.312L10.041 9.75 7 6.707l-3.646 3.647-.708-.708L7 5.293 9.959 8.25l3.65-4.563.781.624z"/>
+              <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4h-3.5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            &nbsp; Feature Visualizations
+          </a>
+        </li>
+        <li class="nav-item  myid">
+          <a class="nav-link text-white" href="/featureimp">
+            <svg class="bi bi-bar-chart-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <rect width="4" height="5" x="1" y="10" rx="1"/>
+              <rect width="4" height="9" x="6" y="6" rx="1"/>
+              <rect width="4" height="14" x="11" y="1" rx="1"/>
+            </svg>
+            &nbsp; Feature Importance
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/cfmatrix">
+            <svg class="bi bi-grid-3x3-gap-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
+            </svg>
+            &nbsp; Correlation Matrix
+          </a>
+        </li>
+        <li class="nav-item  myid">
+          <a class="nav-link text-white" href="/confusionmatrix">
+            <svg class="bi bi-columns" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M15 2H1v12h14V2zM1 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H1z"/>
+              <path fill-rule="evenodd" d="M7.5 14V2h1v12h-1zm0-8H1V5h6.5v1zm7.5 5H8.5v-1H15v1z"/>
+            </svg>
+            &nbsp;  Confusion Matrix
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/businessaction">
+            <svg class="bi bi-layout-text-sidebar-reverse" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z"/>
+              <path fill-rule="evenodd" d="M5 15V1H4v14h1zm8-11.5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5zm0 3a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+            </svg>
+            &nbsp; Business Reviews 
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/summarystatistics">
+            <svg class="bi bi-clipboard-data" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+              <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+              <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+            </svg>
+            &nbsp; Summary Statistics
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/cutoff">
+            <svg class="bi bi-newspaper" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M0 2A1.5 1.5 0 0 1 1.5.5h11A1.5 1.5 0 0 1 14 2v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 0 14V2zm1.5-.5A.5.5 0 0 0 1 2v12a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V2a.5.5 0 0 0-.5-.5h-11z"/>
+              <path fill-rule="evenodd" d="M15.5 3a.5.5 0 0 1 .5.5V14a1.5 1.5 0 0 1-1.5 1.5h-3v-1h3a.5.5 0 0 0 .5-.5V3.5a.5.5 0 0 1 .5-.5z"/>
+              <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+            </svg>
+            &nbsp; Dev Data Analysis
+          </a>
+        </li>
+      <li>
+        <br><br><br> <hr class="bg-light">
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/faq">
+            <svg class="bi bi-question-square-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm4.57 6.033H5.25C5.22 4.147 6.68 3.5 8.006 3.5c1.397 0 2.673.73 2.673 2.24 0 1.08-.635 1.594-1.244 2.057-.737.559-1.01.768-1.01 1.486v.355H7.117l-.007-.463c-.038-.927.495-1.498 1.168-1.987.59-.444.965-.736.965-1.371 0-.825-.628-1.168-1.314-1.168-.901 0-1.358.603-1.358 1.384zm1.251 6.443c-.584 0-1.009-.394-1.009-.927 0-.552.425-.94 1.01-.94.609 0 1.028.388 1.028.94 0 .533-.42.927-1.029.927z"/>
+            </svg>
+            &nbsp; FAQ
+          </a>
+        </li>
+        <li class="nav-item myid">
+          <a class="nav-link text-white" href="/aboutUs">
+            <svg class="bi bi-people-fill" width="1.2em" height="1.2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>
+            &nbsp; About
+          </a>
+        </li>
+    </ul>
+      </div>
+  </nav>
+    <script src="slider.js"></script>
+
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <div class="container">
+    <div class="row">
+        <div class="col-7" style="transform: translate(60%,0%);">
+             <div class="container" style="text-align: center;"><h1> <u>Visualization for Business Reviews</u></h1></div>
+        </div>
+        <div class="w-100 d-none d-md-block"></div>
+
+        <div class="col-8" style="transform: translate(45%,0%);">
+           <div class="container-fluid" id="my_dataviz"></div>
+        </div>
+        <div class="w-100 d-none d-md-block"></div> <!-- Force next columns to break to new line at md breakpoint and up -->
+
+  
+        <div class="container-fluid" >
+          <div class= "row justify-content-center" style="transform: translateX(12%);">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"  onclick="window.location='/BusRevBox';"  checked>
+              <label class="form-check-label" for="inlineRadio1" style="font-weight: bold;font-size: large;" >Box Plot</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"   onclick="window.location='/BusRevViolin';">
+              <label class="form-check-label" for="inlineRadio2" style="font-weight: bold;font-size: large;">Violin Plot</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="window.location='/BusRevStrip';" >
+              <label class="form-check-label" for="inlineRadio3" style="font-weight: bold;font-size: large;">Strip Plot</label>
+            </div>
+          </div>
+          </div>
+</body>
+
+<script>
+//THE FIRST ANIMATED PLOT------------------------------------------------------------------------------------------------------------
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 90, left: 40},
+    width = 600 - margin.left - margin.right,
+    height = 550 - margin.top - margin.bottom;
+
+  // Parse the Data
+  d3.csv("business_review.csv", function(data) {
+      // append the svg object to the body of the page
+      var svg = d3.select("#my_dataviz")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform","translate(" + margin.left + "," + margin.top + ")")
+      
+      // X axis
+      var x = d3.scaleBand()
+      .range([ 0, width])
+      .domain(data.map(function(d) { return d.review; }))
+      .padding(.3) 
+      svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+      .attr("transform", "translate(35,-4)rotate(-16)")
+      .style("text-anchor", "end")
+      .style("font-size","0.2cm")
+      
+      var max=d3.max(data, function(d) { return +d.frequency; })
+      // Y axis
+      var y = d3.scaleLinear()
+      .range([ height,0 ])
+      .domain([0,max+5])
+      svg.append("g")
+      .call(d3.axisLeft(y))
+      
+      // create a tooltip
+      var Tooltip = d3.select("#my_dataviz")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "2px")
+      .style("border-radius", "5px")
+      .style("padding", "5px")
+    
+      // Three function that change the tooltip when user hover / move / leave a cell
+      var mouseover = function(d) {
+      Tooltip
+      .style("opacity", 1)
+      d3.select(this)
+      .style("stroke", "black")
+      .style("stroke-width","3px")
+      .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+      Tooltip
+      .html(d.frequency)
+      .style("left", (d3.mouse(this)[0]+100) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+      .style("transform","translate(0%,-0%)")
+      }
+      var mouseleave = function(d) {
+      Tooltip
+      .style("opacity", 0)
+      d3.select(this)
+      .style("stroke", "none")
+      .style("opacity",0.9)
+      }
+  
+      //Bars
+      svg.selectAll("myRect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("y", function(d) { return y(0); })// always equal to 0
+      .attr("x", function(d) { return x(d.review); })
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(0); })
+      .attr("fill", "#0e4752")
+      .attr("opacity","0.9")
+      .style("border","solid 1px black")
+  
+      // Animation
+      svg.selectAll("rect")
+      .on("mouseover", mouseover)
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("height", function(d) { return height - y(d.frequency)})
+      .delay(function(d,i){console.log(i) ; return(i*100)})
+  })
+  var margin1 = {top: 20, right: 30, bottom: 140, left: 50},
+  width1 = 1000 - margin1.left - margin1.right,
+  height1 = 500 - margin1.top - margin1.bottom;  
+
+  var k=0;
+  var xmlns = "http://www.w3.org/2000/svg";
+  var NS = "http://www.w3.org/2000/svg";
+  // Read the data and compute summary statistics for each specie
+  
+while(k<6){
+      loadPlots(k);
+      k++;
+  }
+
+function loadPlots(k){
+    d3.csv("Strip"+k+".csv", function(data){
+    
+    //Creating Divs
+    var iDiv = document.createElement('div');
+    iDiv.id = 'box'+k;
+    iDiv.className = 'col-6 container-fluid';
+    iDiv.setAttribute("width","fit-content");
+    iDiv.setAttribute("transform","translate(" + 0 + "%," + 13+5*k + "%)");
+    iDiv.innerHTML='<h2><u>No Action - Program Desk Originated Activity</u></h2>';
+    document.getElementsByTagName('body')[0].appendChild(iDiv);
+    console.log(iDiv);
+
+    //Creating SVG elements inside the Div
+    var svg = document.createElementNS(NS, "svg");
+    svg.id="svg"+k;    
+    svg.setAttribute("width", width1 + margin1.left + margin1.right)
+    svg.setAttribute("height", height1 + margin1.top + margin1.bottom)
+    svg.setAttribute("transform","translate(" + margin1.left + "," + margin1.top + ")");
+    iDiv.appendChild(svg);
+    var newheight=height1+5
+    //Creating groups elements inside the Div
+    var g1 = document.createElementNS(xmlns, "g");
+    g1.id="g1"+k;   
+    g1.setAttribute("transform", "translate(25," + newheight + ")")
+    svg.appendChild(g1)
+
+    var g2 = document.createElementNS(xmlns, "g");
+    g2.id="g2"+k;
+    g2.setAttribute("transform", "translate(25,5)")
+    svg.appendChild(g2)
+
+    // Build and Show the Y scale
+    var y = d3.scaleLinear()
+    .domain([ 0,1 ])          // Note that here the Y scale is set manually
+    .range([height1, 0])
+    
+    var yAxis=d3.axisLeft(y)  
+    var spacey=d3.selectAll("#g2"+k)
+    spacey
+    .call(yAxis)
+    
+    // Build and Show the X scale. It is a band scale like for a boxplot: each group has an dedicated RANGE on the axis. This range has a length of x.bandwidth
+    var x = d3.scaleBand()
+    .range([ 0, width1 ])
+    .domain(data.map(function(d) { return d.feature; }))
+    .padding(0.05)     // This is important: it is the space between 2 groups. 0 means no padding. 1 is the maximum.
+
+    var xAxis=d3.axisBottom(x)  
+    var spacex=d3.selectAll("#g1"+k)
+    spacex
+    .style("transform", "translate(0," + height1 + ")")
+    .call(xAxis)
+    .selectAll("text")
+    .attr("transform", "translate(-5,0)rotate(-20)")
+    .style("text-anchor", "end");
+      
+    var myColor = d3
+          .scaleOrdinal()
+          .domain(data)
+          .range(["gold", "#D0202C", "green"]);
+
+    var jitterWidth = 50;
+    var space=d3.select("#svg"+k)
+    space
+    .selectAll("indPoints")
+          .data(data)
+          .enter()
+          .append("circle")
+          .attr("cx", function (d) {
+            return (
+              x(d.feature) - jitterWidth / 2 + Math.random() * jitterWidth
+            );
+          })
+          .attr("cy", function (d) {
+            return y(d.value);
+          })
+          .attr("r", 4)
+          .attr("transform","translate(97,5)")
+          .style("fill",  function (d) {
+            return myColor(d.feature);
+          })
+          .attr("stroke", "black");
+
+    })
+}
+</script>
