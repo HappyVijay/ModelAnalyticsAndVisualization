@@ -13,6 +13,7 @@ from flask import jsonify
 import shutil
 import os
 import stat
+import ppscore as pps
 
 
 def feature_list(features):
@@ -248,9 +249,6 @@ def correlation_mat(id, flag,outputfile): #testing done
 	data = pd.read_csv(file)
 	df = pd.DataFrame(data,columns = features)
 	corrMatrix = df.corr(method=mthd)
-
-
-
 	res = corrMatrix.to_numpy()
 	res
 	f = open(outputfile,"w+")
@@ -443,3 +441,27 @@ def datatoshow(id):
 	df.to_csv("static/"+str(id)+"/data50.csv")
 
 
+def predictive_score(id,outputfile):
+	data = get_data_by_id(id)
+	file = data[4]
+	features =feature_list(data[6])
+	#print(features)
+	data = pd.read_csv(file)
+	df = pd.DataFrame(data,columns = features)
+	mat = pps.matrix(df[features])
+	res = mat.to_numpy()
+	res
+	f = open(outputfile,"w+")
+	f.write("group,variable,value\n")
+	i = 0
+	j =0
+	for f1 in features:
+	    
+	    for f2 in features:
+	        f2 = "feature"+str(j+1)
+	        value = res[i][j]
+	        j = j + 1
+	        f.write(str(f1) + "," + str(f2) + "," + str(value)+ "\n")
+	    i = i+1
+	    j= 0
+	f.close()
