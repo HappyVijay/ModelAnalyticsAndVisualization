@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+   <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous"/> 
+</head>
+<body>
+	 <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      tr,td {
+        text-align: left;
+        padding: 8px;
+       
+      }
+
+      tr:nth-child(1) {background-color: #0e4752; color : white; font-weight: bold; border:solid 3px black;}
+</style>
+	<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="transform: translate(20%,0);">
+
+                            <div class="dropdown" style="transform:translate(30%,20%);margin-bottom: 10%;">
+                                <button class="btn btn-secondary dropdown-toggle" style="background-color:#0e4752;" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Type of Plot
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                  <button class="dropdown-item" id="btn1" type="button" >Alert</button>
+                                  <button class="dropdown-item" id="btn2" type="button">Escalation</button>
+                                  <button class="dropdown-item" id="btn3" type="button">Nonalert</button>
+                                </div>
+                            </div>
+
+
+  			<div class="container" id = "alertdiv" style="display:none;transform: translate(0%,15%);">
+        	<div class="row" style="transform:translate(0%,10%);">
+            <div class="col" >
+            	<div class="col-sm-3 card" style="border: solid 2px black; transform: translate(100%,0%); background-color: #F5F5F5;">
+                    <div class="card-body"  >
+                      <h4 class="card-title" style= "text-align: center">Alerts per Survelliance</h4>
+                      <h3 class="card-text" style="text-align: center">2442</h3>
+                    </div>
+                    </div>
+                  	<div class = "row"  style="transform:translate(-20%,0%)"> 
+	                <table id = "table1" class="pure-table pure-table-bordered" >
+	                  <thead >
+	                  </thead>
+	                </table>
+	            </div>     
+	        </div>      
+	    </div> 
+	</div>
+
+    
+    <div class="container" id = "escalationdiv" style="display:none; height: 50px;transform: translate(0%,15%);">
+        <!--second row with button and table-->
+        <div class="row" style="transform:translate(0%,10%);">
+            <div class="col" >
+            	<div class="col-sm-3 card" style="border: solid 2px black; transform: translate100%,0%); background-color: #F5F5F5;">
+                    <div class="card-body"  >
+                      <h4 class="card-title" style= "text-align: center">Escalations per Survelliance</h4>
+                      <h3 class="card-text" style="text-align: center">6</h3>
+                    </div>
+                    </div>
+                  	<div class = "row"  style="transform: translate(-20%,0%)"> 
+	                <table id = "table3" class="pure-table pure-table-bordered" >
+	                  <thead >
+	                  </thead>
+	                </table>
+            </div>     
+        </div>      
+    </div>  
+   </div>  
+
+   <div class="container" id = "nonalertdiv" style="display: none;transform: translate(0%,15%);">
+        	<div class="row" style="transform:translate(0%,10%);">
+	            <div class="col" >
+	        	<div class="col-sm-3 card" style="border: solid 2px black; transform: translate(100%,0%); background-color: #F5F5F5;">
+                    <div class="card-body"  >
+                      <h4 class="card-title" style= "text-align: center">Non-alerts per Survelliance</h4>
+                      <h3 class="card-text" style="text-align: center">13954</h3>
+                    </div>
+                    </div>
+                  	<div class = "row"  style="transform: translate(-20%,0%)"> 
+	                <table id = "table2" class="pure-table pure-table-bordered">
+	                  <thead >
+	                  </thead>
+	            </table>
+	            </div>     
+	        </div>      
+	    </div> 
+        </div> 
+
+
+</body>
+<script src="http://d3js.org/d3.v3.min.js"></script> 
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+     d3.text("statistics_of_alert_feature_nw.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table1")
+                    .append("table")                     
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; })
+
+            });
+
+
+d3.text("statistics_of_escalated_feature_new.csv", function tabledata(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table3")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+    d3.text("statistics_of_nonalert_feature_new.csv", function tabledata(data) {
+
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("#table2")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+                        .style("border", "solid")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+
+</script> 
+
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$('#btn1').click(function myFunction() {
+        var x = document.getElementById("alertdiv");
+        var y = document.getElementById("escalationdiv");
+        var z = document.getElementById("nonalertdiv");
+        x.style.display = "block";
+        y.style.display = "none";
+        z.style.display = "none";
+});
+$('#btn2').click(function myFunction() {
+        var x = document.getElementById("alertdiv");
+        var y = document.getElementById("escalationdiv");
+        var z = document.getElementById("nonlaertdiv");
+        x.style.display = "none";
+        y.style.display = "block";
+        z.style.display = "none";
+});
+$('#btn3').click(function myFunction() {
+        var x = document.getElementById("alertdiv");
+        var y = document.getElementById("escalationdiv");
+        var z = document.getElementById("nonalertdiv");
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "block";
+});
+  
+
+
+</script>
+
+</html>
